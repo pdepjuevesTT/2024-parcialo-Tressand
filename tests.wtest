@@ -26,4 +26,13 @@ describe "Todos los Tests" {
     const deudaDespuesDeCobrar = lionel.sumaDeDeuda()
     assert.that(deudaDespuesDeCobrar < deudaAntesDeCobrar)
   }
+
+  test "Se puede hallar al que mas tiene" {
+    lionel.comprar(microondas)
+    lionel.comprar(microondas)
+
+    cony.comprar(auto)
+
+    assert.that(personas.elQueMasTiene() == lionel)
+  }
 }
