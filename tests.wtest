@@ -1,0 +1,38 @@
+import main.*
+
+describe "Todos los Tests" {
+  test "Una persona puede pagar con efectivo" {
+    lionel.comprar(microondas)
+    assert.that(lionel.inventario().contains(microondas))
+  }
+  
+  test "Una persona puede pagar con debito" {
+    lionel.formaDePagoPreferida(lionel.formasDePago().get(1))
+    lionel.comprar(microondas)
+    assert.that(lionel.inventario().contains(microondas))
+  }
+
+  test "Una persona puede pagar con credito" {
+    lionel.formaDePagoPreferida(lionel.formasDePago().get(2))
+    lionel.comprar(microondas)
+    assert.that(lionel.inventario().contains(microondas))
+  }
+
+  test "Una persona puede pagar sus deudas" {
+    lionel.formaDePagoPreferida(lionel.formasDePago().get(2))
+    lionel.comprar(microondas)
+    const deudaAntesDeCobrar = lionel.sumaDeDeuda()
+    lionel.cobrarSueldo()
+    const deudaDespuesDeCobrar = lionel.sumaDeDeuda()
+    assert.that(deudaDespuesDeCobrar < deudaAntesDeCobrar)
+  }
+
+  test "Se puede hallar al que mas tiene" {
+    lionel.comprar(microondas)
+    lionel.comprar(microondas)
+
+    cony.comprar(auto)
+
+    assert.that(personas.elQueMasTiene() == lionel)
+  }
+}
