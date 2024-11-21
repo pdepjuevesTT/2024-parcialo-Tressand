@@ -1,3 +1,5 @@
+// --------------PRIMERA PARTE---------------
+
 class Persona {
     var property formasDePago = []
     var property formaDePagoPreferida = null
@@ -145,6 +147,42 @@ object bancos {
     }
 }
 
+// Ejemplos de personas (para uso en tests)
+const lionel = new Persona(dineroInicial = 1000, salario = 1500, formasDePago = [
+    new Debito(dinero = 0),
+    new Debito(dinero = 4000),
+    new Credito(bancoEmisor = bancos.a3()),
+    new Credito(bancoEmisor = bancos.b6()),
+    new Credito(bancoEmisor = bancos.c24())
+])
+
+const cony = new Persona(dineroInicial = 1000, salario = 4000)
+
+object personas {
+    const property lista = [lionel, cony]
+    method elQueMasTiene() {
+        var mejor = lista.first()
+        lista.forEach({persona => 
+            if(persona.inventario().size() > mejor.inventario().size()) mejor = persona
+        })
+        return mejor
+    }
+}
+
+// Ejemplos de Objetos (para uso en tests)
+
+object auto {
+  const property precio = 1000
+  const property nombre = "Auto"
+}
+
+object microondas {
+  const property precio = 400
+  const property nombre = "Microondas"
+}
+
+// --------------SEGUNDA PARTE---------------
+
 class CompradorCompulsivo inherits Persona {
     override method comprar(obj) {
         super(obj)
@@ -174,52 +212,4 @@ class PagadorCompulsivo inherits Persona {
         efectivo.sumarADinero(sueldoRestante)
         sueldoRestante = 0
     }
-}
-
-// Ejemplos de personas (para uso en tests)
-const lionel = new Persona(dineroInicial = 1000, salario = 1500, formasDePago = [
-    new Debito(dinero = 0),
-    new Debito(dinero = 4000),
-    new Credito(bancoEmisor = bancos.a3()),
-    new Credito(bancoEmisor = bancos.b6()),
-    new Credito(bancoEmisor = bancos.c24())
-])
-
-const any = new PagadorCompulsivo(dineroInicial = 1000, salario = 1500)
-
-const benja = new CompradorCompulsivo(dineroInicial = 1000, salario = 0)
-
-const cony = new Persona(dineroInicial = 1000, salario = 4000)
-
-object personas {
-    const property lista = [lionel, any, benja, cony]
-    method elQueMasTiene() {
-        var mejor = lista.first()
-        lista.forEach({persona => 
-            if(persona.inventario().size() > mejor.inventario().size()) mejor = persona
-        })
-        return mejor
-    }
-}
-
-// Ejemplos de Objetos (para uso en tests)
-
-object casa {
-  const property casa = 2000
-  const property nombre = "Casa"
-}
-
-object auto {
-  const property precio = 1000
-  const property nombre = "Auto"
-}
-
-object heladera {
-  const property precio = 800
-  const property nombre = "Heladera"
-}
-
-object microondas {
-  const property precio = 400
-  const property nombre = "Microondas"
 }
