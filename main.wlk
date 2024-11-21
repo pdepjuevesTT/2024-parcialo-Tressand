@@ -191,6 +191,17 @@ const benja = new CompradorCompulsivo(dineroInicial = 1000, salario = 0)
 
 const cony = new Persona(dineroInicial = 1000, salario = 4000)
 
+object personas {
+    const property lista = [lionel, any, benja, cony]
+    method elQueMasTiene() {
+        var mejor = lista.first()
+        lista.forEach({persona => 
+            if(persona.inventario().size() > mejor.inventario().size()) mejor = persona
+        })
+        return mejor
+    }
+}
+
 // Ejemplos de Objetos (para uso en tests)
 
 object casa {
